@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Chatbuble extends StatelessWidget {
-  const Chatbuble({super.key});
-
+  const Chatbuble({super.key, required this.text});
+  final String text;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -13,7 +13,7 @@ class Chatbuble extends StatelessWidget {
           top: 15,
           bottom: 15,
           left: 15,
-          right: 10,
+          right: 15,
         ),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -31,7 +31,7 @@ class Chatbuble extends StatelessWidget {
           ),
         ),
         child: Text(
-          'Welcome to the Chat',
+          text,
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,

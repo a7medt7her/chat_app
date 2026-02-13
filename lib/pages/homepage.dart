@@ -4,10 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Homepage extends StatelessWidget {
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+class Homepage extends StatefulWidget {
   static const String routeName = 'homepage';
+
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  void initState() {
+    super.initState();
+    context.read<MessageCubit>().getMessages();
+  }
+
+  final _controller = ScrollController();
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   TextEditingController messageController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<MessageCubit, MessageState>(
@@ -16,6 +30,12 @@ class Homepage extends StatelessWidget {
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text(state.error)));
+        } else if (state is MessageSuccess) {
+          _controller.animateTo(
+            _controller.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeOut,
+          );
         }
       },
       child: Scaffold(
@@ -40,15 +60,29 @@ class Homepage extends StatelessWidget {
         body: Column(
           children: [
             Expanded(
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return Chatbuble();
+              child: BlocBuilder<MessageCubit, MessageState>(
+                builder: (context, state) {
+                  if (state is MessageSuccess) {
+                    final messages = state.messages;
+                    return ListView.builder(
+                      controller: _controller,
+                      itemCount: messages.length,
+                      itemBuilder: (context, index) {
+                        final message = messages[index];
+                        return Chatbuble(text: message.text);
+                      },
+                    );
+                  } else if (state is MessageLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else {
+                    return const Center(child: Text('No messages yet'));
+                  }
                 },
               ),
             ),
 
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(16),
               child: TextField(
                 controller: messageController,
 
@@ -56,7 +90,7 @@ class Homepage extends StatelessWidget {
                   fillColor: Colors.white,
                   filled: true,
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(15),
                     borderSide: BorderSide(
                       color: Color.fromARGB(255, 12, 104, 202),
                     ),
