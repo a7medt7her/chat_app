@@ -32,8 +32,8 @@ class _HomepageState extends State<Homepage> {
           ).showSnackBar(SnackBar(content: Text(state.error)));
         } else if (state is MessageSuccess) {
           _controller.animateTo(
-            _controller.position.maxScrollExtent,
-            duration: const Duration(milliseconds: 300),
+            0,
+            duration: const Duration(milliseconds: 600),
             curve: Curves.easeOut,
           );
         }
@@ -65,6 +65,7 @@ class _HomepageState extends State<Homepage> {
                   if (state is MessageSuccess) {
                     final messages = state.messages;
                     return ListView.builder(
+                      reverse: true,
                       controller: _controller,
                       itemCount: messages.length,
                       itemBuilder: (context, index) {

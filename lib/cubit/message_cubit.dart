@@ -21,7 +21,7 @@ class MessageCubit extends Cubit<MessageState> {
   }
 
   void getMessages() {
-    messages.orderBy('createdAt', descending: false).snapshots().listen((
+    messages.orderBy('createdAt', descending: true).snapshots().listen((
       snapshot,
     ) {
       final messageList = snapshot.docs
