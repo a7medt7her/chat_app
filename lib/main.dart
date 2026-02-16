@@ -1,9 +1,11 @@
 import 'package:chat_app/cubit/auth_cubit.dart';
+import 'package:chat_app/cubit/cubit/user_data_cubit.dart';
 import 'package:chat_app/cubit/message_cubit.dart';
 import 'package:chat_app/firebase_options.dart';
 import 'package:chat_app/pages/SignUp_page.dart';
 import 'package:chat_app/pages/homepage.dart';
 import 'package:chat_app/pages/login_page.dart';
+import 'package:chat_app/pages/profile_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,11 +24,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<UserDataCubit>(create: (_) => UserDataCubit()),
         BlocProvider<AuthCubit>(create: (_) => AuthCubit()),
         BlocProvider<MessageCubit>(create: (_) => MessageCubit()),
       ],
       child: MaterialApp(
         routes: {
+          ProfilePage.routeName: (context) => ProfilePage(),
           LoginPage.routeName: (context) => const LoginPage(),
           SignupPage.routeName: (context) => SignupPage(),
           Homepage.routeName: (context) => Homepage(),

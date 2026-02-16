@@ -28,6 +28,5 @@ class MessageError extends MessageState {
   MessageError(this.error);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [error];
 }

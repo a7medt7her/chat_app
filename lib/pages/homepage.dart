@@ -93,13 +93,21 @@ class _HomepageState extends State<Homepage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                     borderSide: BorderSide(
+                      width: 2,
                       color: Color.fromARGB(255, 12, 104, 202),
                     ),
                   ),
-
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide(
+                      width: 2,
+                      color: Color.fromARGB(255, 12, 104, 202),
+                    ),
+                  ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                     borderSide: BorderSide(
+                      width: 2,
                       color: Color.fromARGB(255, 12, 0, 0),
                     ),
                   ),

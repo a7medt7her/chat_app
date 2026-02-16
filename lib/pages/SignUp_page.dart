@@ -1,6 +1,6 @@
 import 'package:chat_app/cubit/auth_cubit.dart';
-import 'package:chat_app/pages/homepage.dart';
 import 'package:chat_app/pages/login_page.dart';
+import 'package:chat_app/pages/profile_page.dart';
 import 'package:chat_app/widgets/login&signUp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +35,7 @@ class _SignupPageState extends State<SignupPage> {
               context,
             ).showSnackBar(SnackBar(content: Text('Login Successful')));
             Navigator.of(context, rootNavigator: true).pop();
-            Navigator.pushReplacementNamed(context, Homepage.routeName);
+            Navigator.pushReplacementNamed(context, ProfilePage.routeName);
           } else if (state is AuthError) {
             Navigator.of(context, rootNavigator: true).pop();
             ScaffoldMessenger.of(
