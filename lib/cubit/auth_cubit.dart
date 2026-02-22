@@ -11,13 +11,13 @@ class AuthCubit extends Cubit<AuthState> {
 
     try {
       var auth = FirebaseAuth.instance;
-      await auth.createUserWithEmailAndPassword(
+      final credential = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-
+      final uid = credential.user!.uid;
       emit(AuthSuccess());
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
       emit(AuthError(e.toString()));
     }
   }
@@ -28,9 +28,9 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       var auth = FirebaseAuth.instance;
       await auth.signInWithEmailAndPassword(email: email, password: password);
-
-      emit(AuthSuccess());
-    } catch (e) {
+      final uid = FirebaseAuth.instance.currentUser!.uid;
+      emit(LoginSuccess());
+    } on FirebaseAuthException catch (e) {
       emit(AuthError(e.toString()));
     }
   }

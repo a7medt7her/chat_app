@@ -1,8 +1,8 @@
 class Messagemodel {
   final String text;
-  final String urlimage;
-  Messagemodel(this.text, {required this.urlimage});
+
+  Messagemodel(this.text);
   factory Messagemodel.fromJson(Map<String, dynamic> json) {
-    return Messagemodel(json['text'], urlimage: json['urlimage']);
+    return Messagemodel(json['text']);
   }
 }

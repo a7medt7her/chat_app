@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 
 class CustomDropdownbutton extends StatefulWidget {
-  const CustomDropdownbutton({super.key, required this.items});
+  const CustomDropdownbutton({
+    super.key,
+    required this.items,
+    required this.prefixIcon,
+    required this.hintText,
+    required this.onChanged,
+  });
 
   final List<String> items;
+  final IconData prefixIcon;
+  final String hintText;
+  final Function(String?)? onChanged;
   @override
   State<CustomDropdownbutton> createState() => _CustomDropdownbuttonState();
 }
@@ -15,7 +24,7 @@ class _CustomDropdownbuttonState extends State<CustomDropdownbutton> {
     return DropdownButtonFormField<String>(
       value: genderslected,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.wc, color: Colors.blue),
+        prefixIcon: Icon(widget.prefixIcon, color: Colors.blue),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: const Color.fromARGB(255, 219, 211, 209),
@@ -33,7 +42,7 @@ class _CustomDropdownbuttonState extends State<CustomDropdownbutton> {
         filled: true,
         fillColor: const Color.fromARGB(255, 255, 255, 255),
 
-        hintText: 'Gender',
+        hintText: widget.hintText,
 
         border: OutlineInputBorder(
           borderSide: BorderSide(
@@ -45,12 +54,19 @@ class _CustomDropdownbuttonState extends State<CustomDropdownbutton> {
         ),
       ),
       items: widget.items
-          .map((gender) => DropdownMenuItem(value: gender, child: Text(gender)))
+          .map(
+            (gender) => DropdownMenuItem(
+              alignment: Alignment.centerLeft,
+              value: gender,
+              child: Text(gender),
+            ),
+          )
           .toList(),
       onChanged: (value) {
         setState(() {
           genderslected = value;
         });
+        widget.onChanged!(value);
       },
     );
   }

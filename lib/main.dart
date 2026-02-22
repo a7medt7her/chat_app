@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<UserDataCubit>(create: (_) => UserDataCubit()),
         BlocProvider<AuthCubit>(create: (_) => AuthCubit()),
         BlocProvider<MessageCubit>(create: (_) => MessageCubit()),
-      ],
+      ], 
       child: MaterialApp(
         routes: {
           ProfilePage.routeName: (context) => ProfilePage(),

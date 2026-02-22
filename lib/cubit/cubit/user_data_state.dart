@@ -11,6 +11,11 @@ final class UserDataInitial extends UserDataState {}
 
 final class UserDataLoading extends UserDataState {}
 
+final class UserDataLoaded extends UserDataState {
+  final Userdata userdata;
+  UserDataLoaded(this.userdata);
+}
+
 final class UserDataSuccess extends UserDataState {}
 
 final class UserDataError extends UserDataState {

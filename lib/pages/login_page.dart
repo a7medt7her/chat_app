@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
                 return Center(child: CircularProgressIndicator());
               },
             );
-          } else if (state is AuthSuccess) {
+          } else if (state is LoginSuccess) {
             ScaffoldMessenger.of(
               context,
             ).showSnackBar(SnackBar(content: Text('Login Successful')));

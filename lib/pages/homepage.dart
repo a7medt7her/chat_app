@@ -31,11 +31,13 @@ class _HomepageState extends State<Homepage> {
             context,
           ).showSnackBar(SnackBar(content: Text(state.error)));
         } else if (state is MessageSuccess) {
-          _controller.animateTo(
-            0,
-            duration: const Duration(milliseconds: 600),
-            curve: Curves.easeOut,
-          );
+          Future.delayed(const Duration(milliseconds: 100), () {
+            _controller.animateTo(
+              0,
+              duration: const Duration(milliseconds: 600),
+              curve: Curves.easeOut,
+            );
+          });
         }
       },
       child: Scaffold(

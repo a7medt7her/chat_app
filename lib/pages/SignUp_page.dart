@@ -33,7 +33,7 @@ class _SignupPageState extends State<SignupPage> {
           } else if (state is AuthSuccess) {
             ScaffoldMessenger.of(
               context,
-            ).showSnackBar(SnackBar(content: Text('Login Successful')));
+            ).showSnackBar(SnackBar(content: Text('signUp Successful')));
             Navigator.of(context, rootNavigator: true).pop();
             Navigator.pushReplacementNamed(context, ProfilePage.routeName);
           } else if (state is AuthError) {
