@@ -1,4 +1,4 @@
-# Chat App
+<img src="assets/banner.svg" alt="chat_app" width="100%">
 
 A Flutter chat app built on Firebase. Users sign up and log in with email and password, set up a profile, and send messages that appear live for everyone in the chat.
 
